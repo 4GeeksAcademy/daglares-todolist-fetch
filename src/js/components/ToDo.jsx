@@ -14,6 +14,7 @@ function ToDoApp() {
   const fetchTodoList = async () => {
     try {
       const response = await fetch(urlApi);
+      if (!response.ok) throw new Error (response.statusText);
       const data = await response.json();
       setToDoList(data.todos);
     } catch (error) {
@@ -40,6 +41,7 @@ function ToDoApp() {
 
     try {
       const response = await fetch(urlPost, requestOptions);
+      if (!response.ok) throw new Error;
       const data = await response.json();
       setInputValue("");
       await fetchTodoList();
@@ -55,7 +57,7 @@ function ToDoApp() {
 
     try {
       const response = await fetch(urlDelete(id), requestOptions);
-
+      if (!response.ok) throw new Error;
       await fetchTodoList();
     } catch (error) {
       console.error(error);
